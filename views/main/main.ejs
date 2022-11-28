@@ -1,18 +1,13 @@
 <!DOCTYPE html> 
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+<script src="/js/common"></script>
 <script>
-    function buttonevent(target){
-        fetch('todayPlayer/page/TEST',{
-            method: 'GET',
-            mode : 'cors',
-            cache : 'no-cache',
-            headers: {'Content-Type': 'application/json'},
-            credentials : 'same-origin',
-            redirect : 'follow',
-            referrer : 'no-referrer',
-            body: JSON.stringify(this.obj)
-        })
-        .then(response=>response.text())
-        .then((res)=> document.getElementById("contentBody").innerHTML = res)
+    function buttonevent(target){     
+        axios.get('todayPlayer/page/TEST')
+        .then((response) => {document.getElementById("contentBody").innerHTML = response.data})
+        .catch(function (error) {console.log(error);})
+        .then(function () { console.log("실행되었따.") });
     }
 </script>
 
@@ -22,9 +17,13 @@
     </head>
     <body>
         <div style = 'display: flex; flex-direction: column;'>
-            <div style="height:10vh;"><button onclick="buttonevent(this)">눌러~</button></div>
-            <div id="contentBody" style="height:85vh;">
-                body
+            <div style="max-height:10vh;"><button onclick="buttonevent(this)">눌러~</button></div>
+
+            <div id="leftTab" style="height:85vh; display: flex; flex-direction: row;">
+                <div style="width:20vh;">ddd</div>
+                <div id="contentBody" style="width:80vh">
+
+                </div>
             </div>
             <div style="height:5vh;">footer</div>
         </div>

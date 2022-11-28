@@ -1,25 +1,34 @@
 const express = require('express')
-const app = express()
-const port = 3000
+const common = require('./js/common.js')
 
-const testRouter = require('./router/testRouter')
+const app = express()
+
+
 const mainRouter = require('./router/mainRouter')
 
 app.set('view engine','ejs');
 
-app.use('/test',testRouter);
+app.use('/js/common',function(req,res){
+  res.sendFile('/nodeTest/js/common.js')
+});
+
 app.use('/todayPlayer',mainRouter);
 
 
 app.use(function(req,res,next){
     res.status(404).send('404 Error shit');
+    next();
 })
 
 app.use(function(err, req, res, next) {
     console.error(err.stack);
     res.status(500).send('Something broke!');
+    next();
   });
 
-app.listen(port, () => {
+
+const port = 3000
+
+app.listen(port, (req,res) => {
   console.log(`Example app listening at http://localhost:${port}`)
 })
