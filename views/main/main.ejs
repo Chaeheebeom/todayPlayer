@@ -1,0 +1,32 @@
+<!DOCTYPE html> 
+<script>
+    function buttonevent(target){
+        fetch('todayPlayer/page/TEST',{
+            method: 'GET',
+            mode : 'cors',
+            cache : 'no-cache',
+            headers: {'Content-Type': 'application/json'},
+            credentials : 'same-origin',
+            redirect : 'follow',
+            referrer : 'no-referrer',
+            body: JSON.stringify(this.obj)
+        })
+        .then(response=>response.text())
+        .then((res)=> document.getElementById("contentBody").innerHTML = res)
+    }
+</script>
+
+<html>
+    <head>
+        <title>오늘부터 뮤지션</title>
+    </head>
+    <body>
+        <div style = 'display: flex; flex-direction: column;'>
+            <div style="height:10vh;"><button onclick="buttonevent(this)">눌러~</button></div>
+            <div id="contentBody" style="height:85vh;">
+                body
+            </div>
+            <div style="height:5vh;">footer</div>
+        </div>
+    </body>
+</html>
