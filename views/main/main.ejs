@@ -1,31 +1,83 @@
-<!DOCTYPE html> 
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<!DOCTYPE html>
 
-<script src="/js/common"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="/js/axios.js"></script>
+<script src="/js/main.js"></script>
+
 <script>
-    function buttonevent(target){     
-        axios.get('todayPlayer/page/TEST')
-        .then((response) => {document.getElementById("contentBody").innerHTML = response.data})
-        .catch(function (error) {console.log(error);})
-        .then(function () { console.log("실행되었따.") });
-    }
+  function buttonevent(target) {
+    request.get("/todayPlayer/page/TEST", {}, function (response) {
+      document.getElementById("contentBody").innerHTML = response.data;
+    });
+  }
 </script>
 
+<style>
+  .clicktag:hover {
+    cursor: pointer;
+  }
+</style>
+
 <html>
-    <head>
-        <title>오늘부터 뮤지션</title>
-    </head>
-    <body>
-        <div style = 'display: flex; flex-direction: column;'>
-            <div style="max-height:10vh;"><button onclick="buttonevent(this)">눌러~</button></div>
-
-            <div id="leftTab" style="height:85vh; display: flex; flex-direction: row;">
-                <div style="width:20vh;">ddd</div>
-                <div id="contentBody" style="width:80vh">
-
-                </div>
-            </div>
-            <div style="height:5vh;">footer</div>
+  <head>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+      integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <title>오늘부터 뮤지션</title>
+  </head>
+  <body>
+    <div style="display: flex; flex-direction: column">
+      <div style="max-height: 10vh; display: flex; flex-direction: row; padding: 5px 5px 5px 5px; margin: 0 0 20px 0">
+        <div style="display: flex; flex-direction: row; margin-left: 20px; width: 20%">
+          <div style="font-size: 30px; margin: 0 5px 0 5px">
+            <i class="fa-solid fa-bars clicktag"></i>
+          </div>
+          <div class="clicktag" style="font-size: 30px; margin: 0 5px 0 5px">오늘부터 뮤지션</div>
         </div>
-    </body>
+
+        <div style="width: 60%; display: flex; justify-content: center">
+          <div style="border-radius: 10px 0 0 10px/10px 0 0 10px; border: 1px solid grey; width: 40vh"></div>
+          <div
+            class="clicktag"
+            style="
+              border-radius: 0 10px 10px 0 /0 10px 10px 0;
+              border-top: 1px solid grey;
+              border-right: 1px solid grey;
+              border-bottom: 1px solid grey;
+              width: 50px;
+              float: right;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              flex-wrap: wrap;
+            "
+            onclick="buttonevent()"
+          >
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </div>
+        </div>
+        <div style="display: flex; justify-content: flex-end; margin-right: 20px; width: 20%">
+          <div style="font-size: 30px; margin: 0 35px 0 5px">
+            <i class="fa-solid fa-file-audio clicktag"></i>
+          </div>
+          <div style="font-size: 30px; margin: 0 0 0 5px">
+            <i class="fa-solid fa-circle-user clicktag"></i>
+          </div>
+        </div>
+      </div>
+
+      <div id="leftTab" style="height: 85vh; display: flex; flex-direction: row">
+        <div style="width: 20vh" style="display: flex; flex-direction: row">
+          <div>
+            <div>left</div>
+          </div>
+        </div>
+        <div id="contentBody" style="width: 80vh">ddd</div>
+      </div>
+    </div>
+  </body>
 </html>
