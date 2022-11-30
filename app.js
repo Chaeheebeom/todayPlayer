@@ -9,6 +9,8 @@ app.set("view engine", "ejs");
 
 console.log("__dirname", __dirname);
 
+app.use(express.static(__dirname + '/public'));
+
 app.use("/todayPlayer", mainRouter);
 
 app.use("/js", jsRouter);

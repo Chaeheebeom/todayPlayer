@@ -8,8 +8,11 @@ const PAGETABLE = {
   TEST: path + "/views/testpage/test.ejs",
 };
 
+const serverDefines = require("../serverDefines");
+console.log("serverDefines",serverDefines)
+
 mainRouter.get("/", function (req, res) {
-  res.render("main/main");
+  res.render("main/main",{serverDefines});
 });
 
 mainRouter.get("/page/:key", function (req, res) {

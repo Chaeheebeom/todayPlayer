@@ -9,7 +9,7 @@ jsRouter.get("/axios.js", function (req, res) {
 });
 
 jsRouter.get("/main.js", function (req, res) {
-  res.sendFile(path + "/js/main.js");
+  res.sendFile(path + "/js/main/main.js");
 });
 
 module.exports = jsRouter;
