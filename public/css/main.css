@@ -1,0 +1,93 @@
+div.header-container {
+  max-height: 10vh;
+  display: flex;
+  flex-direction: row;
+  padding: 5px 5px 5px 5px;
+  margin: 0 0 20px 0;
+  z-index: 0;
+}
+
+div.header-container > div:first-child {
+  display: flex;
+  flex-direction: row;
+  margin-left: 20px;
+  width: 20%;
+}
+
+div#homeTitle {
+  display: flex;
+  flex-wrap: nowrap;
+  font-size: 30px;
+  margin: 0 5px 0 5px;
+}
+
+div.header-container > div:nth-child(2) {
+  width: 60%;
+  display: flex;
+  justify-content: center;
+}
+
+input#searchText {
+  border-radius: 10px 0 0 10px/10px 0 0 10px;
+  border: 1px solid grey;
+  width: 40vh;
+}
+
+input#searchText + div {
+  border-radius: 0 10px 10px 0 /0 10px 10px 0;
+  border-top: 1px solid grey;
+  border-right: 1px solid grey;
+  border-bottom: 1px solid grey;
+  width: 50px;
+  float: right;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+div.header-container > div:last-child {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 20px;
+  width: 20%;
+}
+
+div.header-container > div:last-child > div:first-child {
+  font-size: 30px;
+  margin: 0 35px 0 5px;
+}
+
+div.header-container > div:last-child > div:last-child {
+  font-size: 30px;
+  margin: 0 0 0 5px;
+}
+
+div.body-container {
+  height: 85vh;
+  display: flex;
+  flex-direction: row;
+}
+
+div.body-container > .left-container {
+  display: flex;
+  flex-direction: row;
+  width: 20vh;
+}
+
+.clicktag:hover {
+  cursor: pointer;
+}
+
+div#modal-content {
+    background-color:rgba(0,0,0,.3); 
+    justify-content:center; 
+    align-items:center;     
+    position:fixed;        
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;               
+    display:none; 
+    padding:15px; 
+}

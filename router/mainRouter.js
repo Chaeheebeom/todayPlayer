@@ -5,7 +5,7 @@ const mainRouter = express.Router(); // router 인스턴스 생성
 let path = __dirname.replace("\\router", "");
 
 const PAGETABLE = {
-  TEST: path + "/views/testpage/test.ejs",
+  UPLOAD: path +"/views/main/modal/upload.ejs"
 };
 
 const serverDefines = require("../serverDefines");

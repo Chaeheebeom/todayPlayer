@@ -1,4 +1,4 @@
-.container {
+.content-container {
     display: grid;
     grid-template-columns : repeat(4, minmax(30vh, auto));
     grid-template-rows: repeat(4, minmax(30vh, auto));
@@ -11,3 +11,6 @@
 .item{
 
 }
+
+
+
