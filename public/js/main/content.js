@@ -3,8 +3,6 @@ const content = (function () {
   let gene = "";
 
   function init() {
-    console.log("init content");
-
     drawGeneList();
   }
 

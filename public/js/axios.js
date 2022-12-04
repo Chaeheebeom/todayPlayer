@@ -1,9 +1,11 @@
 const request = (function () {
   function get(url, params = {}, thenCallback = null) {
-    let param = { params: params };
-
-    axios
-      .get(url, param)
+    axios({
+      method: "get",
+      url: url,
+      data: params,
+      timeout: 1000,
+    })
       .then((response) => {
         if (thenCallback) thenCallback(response);
       })
@@ -16,10 +18,12 @@ const request = (function () {
   }
 
   function post(url, params = {}, thenCallback = null) {
-    let param = { params: params };
-
-    axios
-      .post(url, param)
+    axios({
+      method: "post",
+      url: url,
+      data: params,
+      timeout: 1000,
+    })
       .then((response) => {
         if (thenCallback) thenCallback(response);
       })
@@ -32,10 +36,12 @@ const request = (function () {
   }
 
   function put(url, params = {}, thenCallback = null) {
-    let param = { params: params };
-
-    axios
-      .put(url, param)
+    axios({
+      method: "put",
+      url: url,
+      data: params,
+      timeout: 1000,
+    })
       .then((response) => {
         if (thenCallback) thenCallback(response);
       })
@@ -48,10 +54,12 @@ const request = (function () {
   }
 
   function patch(url, params = {}, thenCallback = null) {
-    let param = { params: params };
-
-    axios
-      .patch(url, param)
+    axios({
+      method: "patch",
+      url: url,
+      data: params,
+      timeout: 1000,
+    })
       .then((response) => {
         if (thenCallback) thenCallback(response);
       })
@@ -64,10 +72,12 @@ const request = (function () {
   }
 
   function deleteMethod(url, params = {}, thenCallback = null) {
-    let param = { params: params };
-
-    axios
-      .delete(url, param)
+    axios({
+      method: "delete",
+      url: url,
+      data: params,
+      timeout: 1000,
+    })
       .then((response) => {
         if (thenCallback) thenCallback(response);
       })
@@ -79,5 +89,11 @@ const request = (function () {
       });
   }
 
-  return { get: get, post: post, put: put, patch: patch, delete: deleteMethod };
+  return {
+    get: get,
+    post: post,
+    put: put,
+    patch: patch,
+    delete: deleteMethod
+  };
 })();

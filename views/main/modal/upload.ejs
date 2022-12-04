@@ -4,7 +4,15 @@
     <button type="button" class="btn-close" onclick="modal.hide();"></button>
   </div>
 
-  <div class="modal-body">내용~</div>
+  <div class="modal-body">
+    <div style="position: absolute; top:30%; left:43%; right:40%" id="uploadForm">
+      <i class="fa-solid fa-circle-arrow-up clicktag" style="font-size:200px" onclick="upload.showUpload()"></i>
+    </div>
+    <div style="display:none; justify-content: center;" id="freviewFrom">
+      <video controls style="width:80%; border:2px solid black">
+      </video>
+    </div>
+  </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-secondary" onclick="modal.hide();">
       Close
@@ -12,3 +20,5 @@
     <button type="button" class="btn btn-primary">Save changes</button>
   </div>
 </div>
+
+<input type="file" id="input_file_upload" style="display:none"  accept="video/*" onchange="upload.fileUpload(this)"/>

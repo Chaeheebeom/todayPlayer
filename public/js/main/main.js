@@ -1,10 +1,7 @@
 const main = (function () {
-
-  function showUploadPopup(){
-    modal.show('UPLOAD',function(obj){
-      console.log('팝업!',obj)
-    })
+  function showUploadPopup() {
+    modal.show("UPLOAD");
   }
 
-  return {showUploadPopup:showUploadPopup}
+  return { showUploadPopup: showUploadPopup };
 })();
