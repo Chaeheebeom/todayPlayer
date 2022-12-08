@@ -9,8 +9,8 @@ app.set("view engine", "ejs");
 app.use(express.static(__dirname + '/public'));
 app.use(express.static(__dirname + '/videos'));
 
-app.use("/todayPlayer", mainRouter);
-app.use("/todayPlayer", fileRouter);
+app.use("/", mainRouter);
+app.use("/", fileRouter);
 
 const port = 3000;
 

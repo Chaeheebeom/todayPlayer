@@ -1,0 +1,13 @@
+#uploadForm {
+  display: none;
+  position: absolute;
+  top: 30%;
+  left: 43%;
+  right: 40%;
+}
+
+#freviewFrom {
+  display: block;
+  flex-direction: column;
+  justify-content: center;
+}

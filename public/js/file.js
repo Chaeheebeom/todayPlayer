@@ -1,9 +1,8 @@
 const file = (function () {
-
   function upload(params, thenCallback) {
     axios({
       method: "post",
-      url: "/todayPlayer/file",
+      url: "/file",
       data: params,
       headers: {
         "Content-Type": "multipart/form-data",
@@ -14,9 +13,6 @@ const file = (function () {
       })
       .catch(function (error) {
         console.log(error);
-      })
-      .then(function (result) {
-        console.log("get : ", result);
       });
   }
 

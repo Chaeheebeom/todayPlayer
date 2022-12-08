@@ -1,6 +1,6 @@
 const main = (function () {
   function showUploadPopup() {
-    modal.show("UPLOAD");
+    modal.show("UPLOAD",upload.init);
   }
 
   return { showUploadPopup: showUploadPopup };
