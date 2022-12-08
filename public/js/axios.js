@@ -1,4 +1,11 @@
 const request = (function () {
+  /**
+   * get 요청
+   * @param {string} url
+   * @param {object} params
+   * @param {function} thenCallback
+   * @returns {Response} 요청한 데이터를 리턴
+   */
   function get(url, params = {}, thenCallback = null) {
     axios({
       method: "get",
@@ -16,7 +23,13 @@ const request = (function () {
         console.log("get : ", result);
       });
   }
-
+  /**
+   * post 요청
+   * @param {string} url
+   * @param {object} params
+   * @param {function} thenCallback
+   * @returns {Response} 요청한 데이터를 리턴
+   */
   function post(url, params = {}, thenCallback = null) {
     axios({
       method: "post",
@@ -34,7 +47,13 @@ const request = (function () {
         console.log("get : ", result);
       });
   }
-
+  /**
+   * put 요청
+   * @param {string} url
+   * @param {object} params
+   * @param {function} thenCallback
+   * @returns {Response} 요청한 데이터를 리턴
+   */
   function put(url, params = {}, thenCallback = null) {
     axios({
       method: "put",
@@ -52,7 +71,13 @@ const request = (function () {
         console.log("get : ", result);
       });
   }
-
+  /**
+   * patch 요청
+   * @param {string} url
+   * @param {object} params
+   * @param {function} thenCallback
+   * @returns {Response} 요청한 데이터를 리턴
+   */
   function patch(url, params = {}, thenCallback = null) {
     axios({
       method: "patch",
@@ -70,7 +95,13 @@ const request = (function () {
         console.log("get : ", result);
       });
   }
-
+  /**
+   * delete 요청
+   * @param {string} url
+   * @param {object} params
+   * @param {function} thenCallback
+   * @returns {Response} 요청한 데이터를 리턴
+   */
   function deleteMethod(url, params = {}, thenCallback = null) {
     axios({
       method: "delete",
@@ -94,6 +125,6 @@ const request = (function () {
     post: post,
     put: put,
     patch: patch,
-    delete: deleteMethod
+    delete: deleteMethod,
   };
 })();
