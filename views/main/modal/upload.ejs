@@ -7,21 +7,115 @@
   </div>
 
   <div class="modal-body">
-    <div id="uploadForm">
+    <div class="uploadForm">
       <i
         class="fa-solid fa-circle-arrow-up clicktag"
         style="font-size: 200px"
       ></i>
     </div>
 
-    <div id="freviewFrom">
-      <audio controls style="width: 100%" src="1670498099817_cometogether.mp3"></audio>
-      <div style="margin-top:30px; display: flex; flex-direction: column;">
-        <div style="font-size:20px; margin: 0 0 10px 0;">세부정보</div>
-        <div style="padding:5px 10px 5px 10px; display: flex; flex-direction: column; border: 1px solid grey; border-radius: 10px 10px 10px 10px / 10px 10px 10px 10px;">
-          <div style="font-size:14px">제목(필수항목)</div>
-          <div><input style="border:none; outline:none" placeholder="제목을 입력해주세요(필수항목입니다)"></input></div>
-          <div style="text-align:right">0/100</div>
+    <div class="freviewForm">
+      <audio
+        id="freviewAudio"
+        controls
+        style="width: 50%"
+        src=""
+      ></audio>
+
+      <div class="content-container">
+        <div class="half-container">
+          <div class="container-title">세부정보</div>
+          <div class="input-template">
+            <div class="input-title">제목(필수항목)</div>
+            <textarea
+              id="titleText"
+              class="input-content"
+              placeholder="제목을 입력해주세요(필수항목입니다)"
+              rows="2"
+              wrap="soft"
+              maxlength="100"
+            ></textarea>
+            <div class="input-footer" style="text-align: right">0/100</div>
+          </div>
+
+          <div class="input-template">
+            <div class="input-title">설명</div>
+            <textarea
+              id="contentText"
+              class="input-content"
+              placeholder="청자에게 음악에 대해 이야기하기"
+              rows="4"
+              wrap="soft"
+              maxlength="1000"
+            ></textarea>
+            <div class="input-footer">0/1000</div>
+          </div>
+        </div>
+
+        <div class="half-container">
+          <div class="container-title"></div>
+
+          <div class="input-template">
+            <div class="input-title">재생목록</div>
+            <select id="selectedPlayListDiv" class="input-content">
+              <option>재생목록1</option>
+              <option>재생목록2</option>
+              <option>재생목록3</option>
+            </select>
+
+            <div
+              id="playListDiv"
+              style="display: flex; flex-direction: column; display: none"
+            >
+              <ul id="playListUl" style="list-style: none">
+                <li><input type="checkbox" />무야호</li>
+                <li><input type="checkbox" />무야호</li>
+              </ul>
+              <div
+                style="
+                  text-align: right;
+                  display: flex;
+                  flex-direction: row;
+                  justify-content: space-between;
+                  border-top: 1px solid grey;
+                "
+              >
+                <button
+                  style="
+                    border: none;
+                    outline: none;
+                    background-color: white;
+                    margin-top: 5px;
+                  "
+                >
+                  새재생목록
+                </button>
+                <button
+                  id="savePlayListBtn"
+                  style="
+                    border: none;
+                    outline: none;
+                    background-color: white;
+                    margin-top: 5px;
+                  "
+                >
+                  완료
+                </button>
+              </div>
+            </div>
+
+            <div class="input-footer"></div>
+          </div>
+
+          <div class="input-template">
+            <div class="input-title">연령제한</div>
+            <select class="input-content">
+              <option>전체이용가</option>
+              <option>18세이상</option>
+              <option>아동용</option>
+            </select>
+            <div class="input-footer"></div>
+          </div>
         </div>
       </div>
     </div>

@@ -3,7 +3,7 @@ const file = (function () {
    * 파일을 업로드하는 함수
    * @param {FormData} file 
    * @param {Function} callback 
-   * @returns {response} 업로드한 파일을 리턴해준다.
+   * @returns {Response} 업로드한 파일을 리턴해준다.
    */
   function upload(file, callback) {
     axios({

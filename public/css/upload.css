@@ -1,13 +1,60 @@
-#uploadForm {
-  display: none;
+div.uploadForm {
+  display: block;
   position: absolute;
   top: 30%;
   left: 43%;
   right: 40%;
 }
 
-#freviewFrom {
-  display: block;
+div.freviewForm {
+  display: none;
   flex-direction: column;
   justify-content: center;
+}
+
+div.freviewForm div.half-container {
+  width: 50%;
+  margin: 30px 10px 10px 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+div.freviewForm > div.content-container {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: row;
+}
+
+div.half-container > div.container-title {
+  font-size: 20px;
+  margin: 0 0 10px 0;
+  display: flex;
+  flex-direction: column;
+  flex-basis: 50px;
+}
+
+div.half-container > div.input-template {
+  margin: 5px 0 5px 0;
+  padding: 5px 10px 5px 10px;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid grey;
+  border-radius: 10px 10px 10px 10px / 10px 10px 10px 10px;
+}
+
+div.input-template > div.input-title {
+  font-size: 14px;
+}
+
+div.input-template > .input-content {
+  border: none;
+  outline: none;
+  width: 100%;
+}
+
+div.input-template > div.input-footer {
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  flex-basis: 30px;
 }
