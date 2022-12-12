@@ -2,8 +2,8 @@ const express = require("express");
 
 const app = express();
 
-const mainRouter = require("./router/mainRouter");
-const fileRouter = require("./router/fileRouter");
+const mainRouter = require("./src/router/mainRouter");
+const fileRouter = require("./src/router/fileRouter");
 app.set("view engine", "ejs");
 
 app.use(express.static(__dirname + '/public'));
@@ -13,7 +13,7 @@ app.use("/", mainRouter);
 app.use("/", fileRouter);
 
 
-const testRouter = require('./router/testRouter')
+const testRouter = require('./src/test/router/testRouter')
 app.use("/music",testRouter)
 
 const port = 3000;
