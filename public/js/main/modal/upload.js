@@ -44,10 +44,19 @@ const upload = (function () {
   }
 
   function showFreviewEvent(audio){
+    console.log(audio)
     var objectURL = URL.createObjectURL(audio);
+    
+    var sound = new Howl({
+      src: [objectURL]
+      
+    });
+
+    console.log(sound)
+    
     document.querySelector(".uploadForm").style.display = "none";
     document.querySelector(".freviewForm").style.display = "flex";
-    document.querySelector("#freviewAudio").src = objectURL;
+    //document.querySelector("#freviewAudio").src = objectURL;
     
   }
 

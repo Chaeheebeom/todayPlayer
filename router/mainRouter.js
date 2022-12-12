@@ -11,6 +11,9 @@ const PAGETABLE = {
 const serverDefines = require("../serverDefines");
 console.log("serverDefines",serverDefines)
 
+const connect = require('../connect');
+console.log('객체생성 : ',connect)
+
 mainRouter.get("/", function (req, res) {
   res.render("main/main",{serverDefines});
 });

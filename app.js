@@ -12,6 +12,10 @@ app.use(express.static(__dirname + '/videos'));
 app.use("/", mainRouter);
 app.use("/", fileRouter);
 
+
+const testRouter = require('./router/testRouter')
+app.use("/music",testRouter)
+
 const port = 3000;
 
 app.listen(port, (req, res) => {
