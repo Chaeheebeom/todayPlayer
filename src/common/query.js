@@ -1,5 +1,5 @@
 const connect = require("../config/connect");
-const response = require("..//config/response");
+const response = require("../config/response");
 
 let query = {
   select: async function (queryStr) {
