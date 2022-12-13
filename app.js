@@ -1,13 +1,16 @@
 const express = require("express");
+let bodyParser = require('body-parser');
 
 const app = express();
 
 const mainRouter = require("./src/router/mainRouter");
-const fileRouter = require("./src/router/fileRouter");
+const fileRouter = require("./src/file/router/fileRouter");
 app.set("view engine", "ejs");
 
 app.use(express.static(__dirname + '/public'));
 app.use(express.static(__dirname + '/videos'));
+
+app.use(bodyParser.urlencoded({ extended : false }))
 
 app.use("/", mainRouter);
 app.use("/", fileRouter);

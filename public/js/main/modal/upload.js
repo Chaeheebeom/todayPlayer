@@ -58,18 +58,32 @@ const upload = (function () {
   }
 
   function saveAudioEvent() {
-    if (confirm("저장하시겠습니까?")) {
-      fileUpload();
-      audio = null;
+    if (confirm("노래를 올리시겠습니까?")) {
+      validateText() ? fileUpload() : alert("제목을 입력해 주세요");
     }
+  }
+
+  function validateText() {
+    let ret = true;
+    if (document.querySelector("#titleText").value == "") ret = false;
+
+    return ret;
   }
 
   function fileUpload() {
     let params = new FormData();
     params.append("file", audio);
+
+    var vo = {
+      title: document.querySelector("#titleText").value,
+      content: document.querySelector("#contentText").value,
+    };
+    params.append("data", JSON.stringify(vo));
     file.upload(params, function (res) {
-      if (res.data.code == 200) {
+      console.log(res)
+      if (res.data.response.code == 201) {
         alert("업로드완료");
+        audio = null;
         modal.hide();
       }
     });

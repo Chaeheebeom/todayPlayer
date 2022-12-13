@@ -1,7 +1,7 @@
 const express = require("express");
 const multer = require("multer");
-const response = require("../config/response");
 const path = require("path");
+const fileService = require('../service/fileService');
 
 var storage = multer.diskStorage({
   destination: function (req, file, callback) {
@@ -19,7 +19,13 @@ const upload = multer({ storage: storage });
 const fileRouter = express.Router(); // router 인스턴스 생성
 
 fileRouter.post("/file", upload.single("file"), function (req, res) {
-  res.send(response.SUCCESS);
+  console.log('req',req)
+  let data =  JSON.parse(req.body.data);//title,content
+  data.path = req.file.path;
+  data.filename = req.file.filename;
+  data.originalfilename = req.file.originalname;
+  data.mimetype = req.file.mimetype;
+  fileService.post(data).then((ret)=>res.send(ret));
 });
 
 module.exports = fileRouter;
