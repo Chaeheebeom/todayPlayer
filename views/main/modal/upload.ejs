@@ -26,7 +26,7 @@
       <div class="content-container">
         <div class="half-container">
           <div class="container-title">세부정보</div>
-          <div class="input-template">
+          <div class="input-template" id="titleDiv" style="border:1px solid red;">
             <div class="input-title">제목(필수항목)</div>
             <textarea
               id="titleText"
@@ -85,7 +85,7 @@
                   style="
                     border: none;
                     outline: none;
-                    background-color: white;
+                    background-color: #ffffff;
                     margin-top: 5px;
                   "
                 >
@@ -117,6 +117,15 @@
             </select>
             <div class="input-footer"></div>
           </div>
+
+          <div class="input-template" id="geneDiv" style="border:1px solid red;">
+            <div class="input-title">장르</div>
+            <ul id="geneListUl">
+
+            </ul>
+            <div class="input-footer"></div>
+          </div>
+
         </div>
       </div>
     </div>

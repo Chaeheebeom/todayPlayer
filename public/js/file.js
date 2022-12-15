@@ -11,7 +11,7 @@ const file = (function () {
       url: "/file",
       data: file,
       headers: {
-        "Content-Type": "multipart/form-data",
+        "Content-Type": "multipart/form-data; charset=UTF-8",
       },
     })
       .then((response) => {

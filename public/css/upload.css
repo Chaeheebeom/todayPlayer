@@ -23,6 +23,8 @@ div.freviewForm > div.content-container {
   margin-top: 30px;
   display: flex;
   flex-direction: row;
+  overflow-y: auto;
+  max-height: 50vh;
 }
 
 div.half-container > div.container-title {
@@ -57,4 +59,11 @@ div.input-template > div.input-footer {
   display: flex;
   flex-direction: column;
   flex-basis: 30px;
+}
+
+ul#geneListUl > li {
+  list-style-type: none;
+  float: left;
+  margin-left: 20px;
+  display: inline;
 }

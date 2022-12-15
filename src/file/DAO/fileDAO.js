@@ -8,7 +8,8 @@ module.exports =  {
         path:$path,
         filename:$filename,
         originalfilename:$originalfilename,
-        mimetype:$mimetype
+        mimetype:$mimetype,
+        gene:$gene
       }) RETURN n;
     `;
     return query.insert(readQuery,data)
