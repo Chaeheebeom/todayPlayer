@@ -14,16 +14,15 @@ const content = (function () {
 
   function drawGeneList() {
     //TODO 서버로 사용자에 맞는 gene목록 가져오기
-    let genes = [
-      { idx: 0, gene: "전체" },
-      { idx: 1, gene: "가요" },
-      { idx: 2, gene: "락" },
-      { idx: 3, gene: "댄스" },
-      { idx: 4, gene: "국악" },
-      { idx: 5, gene: "클래식" },
-    ];
-    genes.forEach((gene) => setInputTemplete(gene));
+    request.get("genes", {}, function (json) {
+      let genes = json.data;
+      genes.unshift('전체')
+      idx = 0;
+      genes.forEach((gene) => setInputTemplete(gene));
+    });
   }
+
+  let idx = 0;
 
   function setInputTemplete(gene) {
     let group = document.querySelector("#geneButtonGroup");
@@ -32,18 +31,18 @@ const content = (function () {
     input.type = "radio";
     input.className = "btn-check";
     input.name = "btnradio";
-    input.id = "btnradio" + gene.idx;
+    input.id = "btnradio" + idx;
     input.autocomplete = "off";
-    input.value = gene.gene;
+    input.value = gene;
     input.onclick = selectGene;
-    if (gene.idx == 0) {
+    if (idx == 0) {
       input.checked = true;
     }
 
     let label = document.createElement("label");
     label.className = "btn btn-outline-primary";
-    label.innerText = gene.gene;
-    label.htmlFor = "btnradio" + gene.idx;
+    label.innerText = gene;
+    label.htmlFor = "btnradio" + idx++;
 
     group.appendChild(input);
     group.appendChild(label);
@@ -65,7 +64,6 @@ const content = (function () {
       name: document.querySelector("#searchText").value,
       gene: gene,
     };
-    //TODO 조회하는 url추가
     request.get("/music", params, drawContent);
   }
 

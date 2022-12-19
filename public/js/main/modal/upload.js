@@ -90,13 +90,15 @@ const upload = (function () {
 
     let genes = [];
     document
-          .querySelectorAll("#geneListUl input")
-          .forEach((checkbox) => (checkbox.checked ? genes.push(checkbox.value) : null));
+      .querySelectorAll("#geneListUl input")
+      .forEach((checkbox) =>
+        checkbox.checked ? genes.push(checkbox.value) : null
+      );
 
     var vo = {
       title: document.querySelector("#titleText").value,
       content: document.querySelector("#contentText").value,
-      gene:genes.join()
+      gene: genes.join(),
     };
     params.append("data", JSON.stringify(vo));
     file.upload(params, function (res) {
@@ -109,55 +111,38 @@ const upload = (function () {
   }
 
   function makegeneList() {
-    let geneArr = [
-      "가요",
-      "락",
-      "재즈",
-      "클래식",
-      "댄스",
-      "시티팝",
-      "메탈",
-      "힙합",
-      "알앤비",
-      "소울",
-      "팝송",
-      "뉴에이지",
-      "트로트",
-      "로파이",
-      "제이팝",
-      "오에스티",
-      "만화주제가",
-      "커버",
-      "자작곡"
-    ];
+    request.get("genes", {}, function (json) {
+      let genes = json.data;
+      let ul = document.querySelector("#geneListUl");
 
-    let ul = document.querySelector("#geneListUl");
+      genes.forEach((gene) => {
+        let li = document.createElement("li");
 
-    geneArr.forEach((gene) => {
-      let li = document.createElement("li");
+        let input = document.createElement("input");
+        input.type = "checkbox";
+        input.value = gene;
+        input.id = gene;
+        input.onclick = (event) => {
+          let isCheck = false;
+          document
+            .querySelectorAll("#geneListUl input")
+            .forEach((checkbox) =>
+              checkbox.checked ? (isCheck = true) : null
+            );
+          let geneDiv = document.querySelector("#geneDiv");
+          isCheck
+            ? (geneDiv.style.border = "1px solid black")
+            : (geneDiv.style.border = "1px solid red");
+        };
 
-      let input = document.createElement("input");
-      input.type = "checkbox";
-      input.value = gene;
-      input.id = gene;
-      input.onclick = (event) => {
-        let isCheck = false;
-        document
-          .querySelectorAll("#geneListUl input")
-          .forEach((checkbox) => (checkbox.checked ? (isCheck = true) : null));
-        let geneDiv = document.querySelector("#geneDiv");
-        isCheck
-          ? (geneDiv.style.border = "1px solid black")
-          : (geneDiv.style.border = "1px solid red");
-      };
+        let label = document.createElement("label");
+        label.innerHTML = gene;
+        label.htmlFor = gene;
 
-      let label = document.createElement("label");
-      label.innerHTML = gene;
-      label.htmlFor = gene;
-
-      li.appendChild(input);
-      li.appendChild(label);
-      ul.append(li);
+        li.appendChild(input);
+        li.appendChild(label);
+        ul.append(li);
+      });
     });
   }
 
