@@ -72,22 +72,7 @@ const content = (function () {
 
   function drawContent() {
 
-    let svgNS = "http://www.w3.org/2000/svg";  
-
-    let svg = document.querySelector("#svg");
-    let w = parseFloat(svg.getAttributeNS(null, 'width'));
-    let h = parseFloat(svg.getAttributeNS(null, 'height'));
     
-    var circle = document.createElementNS(svgNS,"circle");
-
-    circle.setAttributeNS(null,"cx"    , 800);
-    circle.setAttributeNS(null,"cy"    , 400);
-    circle.setAttributeNS(null,"r"     , 700);
-    circle.setAttributeNS(null,"fill"  ,"#f72");
-    circle.setAttributeNS(null,"stroke","none");
-    circle.setAttributeNS(null,"preserveAspectRatio","xMinYMin meet")
-
-    svg.appendChild(circle);
   }
 
   return {

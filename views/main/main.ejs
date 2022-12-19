@@ -9,6 +9,11 @@
 <script src="/js/main/content.js"></script>
 <script src="/js/main/modal/upload.js"></script>
 
+<script>
+  window.onload = function () {
+    main.init();
+  };
+</script>
 <html>
   <head>
     <link href="/css/style.css" rel="stylesheet" type="text/css" />
@@ -40,7 +45,7 @@
         <div>
           <!--div.header-container > div:first-child-->
           <div style="font-size: 30px; margin: 0 5px 0 5px">
-            <i class="fa-solid fa-bars clicktag"></i>
+            <i class="fa-solid fa-bars clicktag" id="leftMenuControl"></i>
           </div>
           <div
             class="clicktag"
@@ -62,7 +67,7 @@
         <div>
           <!--div.header-container > div:last-child-->
           <div
-            onclick="main.showUploadPopup()"
+            id="uploadButton"
             data-bs-toggle="modal"
             data-bs-target="#staticBackdrop"
           >
@@ -76,12 +81,31 @@
 
       <div class="body-container">
         <div class="left-container">
-          <div>left</div>
+          <div>
+            <ul style="list-style-type: none; font-size: 1.1rem">
+              <li
+                class="clicktag"
+                name="li_1"
+                onclick="main.call('CONTENT',content.init)"
+                style="display: flex"
+              >
+                <i class="fa-solid fa-house"></i
+                ><label class="liLabel clicktag" for="li_1">홈</label>
+              </li>
+              <li
+                class="clicktag"
+                name="li_2"
+                onclick="main.call('PLAYLIST',content.init)"
+                style="display: flex"
+              >
+                <i class="fa-solid fa-headphones"></i
+                ><label class="liLabel clicktag" for="li_2">플레이리스트</label>
+              </li>
+            </ul>
+          </div>
         </div>
 
-        <div id="contentBody" style="width: 90%">
-          <%-include('content.ejs') %>
-        </div>
+        <div id="contentBody"></div>
       </div>
     </div>
     <!-- Modal -->

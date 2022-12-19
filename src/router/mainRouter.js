@@ -6,13 +6,12 @@ let path = __dirname.replace("\\src\\router", "");
 
 const PAGETABLE = {
   UPLOAD: path + "/views/main/modal/upload.ejs",
+  CONTENT: path + "/views/main/content.ejs",
+  PLAYLIST: path + "/views/main/playList.ejs",
 };
 
 const serverDefines = require("../config/serverDefines");
 console.log("serverDefines", serverDefines);
-
-const connect = require("../config/connect");
-console.log("객체생성 : ", connect);
 
 mainRouter.get("/", function (req, res) {
   res.render("main/main", { serverDefines });

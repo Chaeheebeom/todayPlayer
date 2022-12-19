@@ -73,21 +73,61 @@ div.body-container > .left-container {
   display: flex;
   flex-direction: row;
   width: 20vh;
+  transition: width 0.5s;
+}
+
+label.liLabel {
+  transition: display 0.5s;
+}
+
+.appear {
+  animation: fade-in 1s;
+  animation-fill-mode: forwards;
+  display: inline-block;
+}
+
+.disappear {
+  animation: fade-out 1s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-out {
+  from {
+    opacity: 1;
+
+  }
+  to {
+    opacity: 0;
+  }
 }
 
 .clicktag:hover {
   cursor: pointer;
 }
 
+div#contentBody {
+  width: 90%;
+  margin-left: 50px;
+}
+
 div#modal-content {
-    background-color:rgba(0,0,0,.3); 
-    justify-content:center; 
-    align-items:center;     
-    position:fixed;        
-    top:0;
-    left:0;
-    right:0;
-    bottom:0;               
-    display:none; 
-    padding:15px; 
+  background-color: rgba(0, 0, 0, 0.3);
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: none;
+  padding: 15px;
 }
