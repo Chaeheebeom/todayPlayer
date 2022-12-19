@@ -12,8 +12,6 @@ const main = (function () {
     };
 
     document.querySelector("#leftMenuControl").onclick = () => {
-      console.log("leftMenuControl");
-
       if (isOpenLeftMenu) {
         document.querySelectorAll(".liLabel").forEach((label) => {
           label.classList.remove("appear");

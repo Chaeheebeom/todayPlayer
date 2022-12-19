@@ -71,8 +71,27 @@ const content = (function () {
   }
 
   function drawContent() {
+    request.get("/music", {}, function (json) {
+      console.log("받아오기", json);
 
-    
+      let musics = json.data;
+
+      let container = document.querySelector("div.content-container");
+
+      musics.data.forEach((music) => {
+        let item = document.createElement("div");
+        item.className = "item clicktag";
+        item.innerHTML = music.name;
+        item.onclick = () => {
+          console.log(music.path);
+          document.querySelector(".footer-container").classList.add("appear");
+          document.querySelector("#footerAudio").src = music.filename;
+          document.querySelector("#footerAudio").play();
+        };
+
+        container.appendChild(item);
+      });
+    });
   }
 
   return {

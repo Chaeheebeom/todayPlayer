@@ -1,0 +1,11 @@
+div.content-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(30%, auto));
+  grid-template-rows: repeat(auto-fill, minmax(100px, auto));
+  gap: 20px 20px;
+  align-items: center; 
+}
+
+div.item {
+  margin:100px 0 100px 0
+}

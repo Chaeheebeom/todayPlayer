@@ -19,9 +19,6 @@ const request = (function () {
       .catch(function (error) {
         console.log(error);
       })
-      .then(function (result) {
-        console.log("get : ", result);
-      });
   }
   /**
    * post 요청
@@ -43,9 +40,6 @@ const request = (function () {
       .catch(function (error) {
         console.log(error);
       })
-      .then(function (result) {
-        console.log("get : ", result);
-      });
   }
   /**
    * put 요청
@@ -67,9 +61,6 @@ const request = (function () {
       .catch(function (error) {
         console.log(error);
       })
-      .then(function (result) {
-        console.log("get : ", result);
-      });
   }
   /**
    * patch 요청
@@ -91,9 +82,6 @@ const request = (function () {
       .catch(function (error) {
         console.log(error);
       })
-      .then(function (result) {
-        console.log("get : ", result);
-      });
   }
   /**
    * delete 요청
@@ -115,9 +103,6 @@ const request = (function () {
       .catch(function (error) {
         console.log(error);
       })
-      .then(function (result) {
-        console.log("get : ", result);
-      });
   }
 
   return {

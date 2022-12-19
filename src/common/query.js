@@ -6,6 +6,7 @@ let instance = connect.getInstacne();
 
 let query = {
   select: async function (queryStr, key = "n") {
+    console.log('queryStr : ', queryStr);
     let ret = initRet(response.FAILSELECT);
     try {
       let readResult = await instance.session.executeRead((tx) =>
@@ -20,6 +21,7 @@ let query = {
     return ret;
   },
   insert: async function (queryStr, json, key="n") {
+    console.log('queryStr : ', queryStr);
     let ret = initRet(response.FAILINSERT);
     try {
       const writeResult = await instance.session.executeWrite((tx) =>
@@ -33,6 +35,7 @@ let query = {
     return ret;
   },
   update: async function (queryStr, json, key = "n") {
+    console.log('queryStr : ', queryStr);
     let ret = initRet(response.FAILUPDATE);
     try {
       const writeResult = await instance.session.executeWrite((tx) =>
