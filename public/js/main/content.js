@@ -1,15 +1,15 @@
 const content = (function () {
-  let text = "";
   let gene = "";
 
   function init() {
     addEvents();
     drawGeneList();
-    drawContent();
+    search();
   }
 
   function addEvents() {
     document.querySelector("#searchText").onkeyup = getText;
+    document.querySelector("#searchBtn").onclick = search;
   }
 
   function drawGeneList() {
@@ -51,7 +51,6 @@ const content = (function () {
 
   function getText() {
     if (window.event.keyCode == 13) {
-      text = document.querySelector("#searchText").value;
       search();
     }
   }
@@ -63,34 +62,34 @@ const content = (function () {
 
   function search() {
     let params = {
-      text: text,
+      name: document.querySelector("#searchText").value,
       gene: gene,
     };
-    //TODO 영상조회하는 url추가
-    request.get("", params, function () {});
+    //TODO 조회하는 url추가
+    request.get("/music", params, drawContent);
   }
 
-  function drawContent() {
-    request.get("/music", {}, function (json) {
-      console.log("받아오기", json);
+  function drawContent(json) {
+    let musics = json.data;
 
-      let musics = json.data;
+    let container = document.querySelector("div.content-container");
 
-      let container = document.querySelector("div.content-container");
+    while (container.hasChildNodes()) {
+      container.removeChild(container.firstChild);
+    }
 
-      musics.data.forEach((music) => {
-        let item = document.createElement("div");
-        item.className = "item clicktag";
-        item.innerHTML = music.name;
-        item.onclick = () => {
-          console.log(music.path);
-          document.querySelector(".footer-container").classList.add("appear");
-          document.querySelector("#footerAudio").src = music.filename;
-          document.querySelector("#footerAudio").play();
-        };
+    musics.data.forEach((music) => {
+      let item = document.createElement("div");
+      item.className = "item clicktag";
+      item.innerHTML = music.name;
+      item.onclick = () => {
+        console.log(music.path);
+        document.querySelector(".footer-container").classList.add("appear");
+        document.querySelector("#footerAudio").src = music.filename;
+        document.querySelector("#footerAudio").play();
+      };
 
-        container.appendChild(item);
-      });
+      container.appendChild(item);
     });
   }
 

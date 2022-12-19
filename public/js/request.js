@@ -7,9 +7,15 @@ const request = (function () {
    * @returns {Response} 요청한 데이터를 리턴
    */
   function get(url, params = {}, thenCallback = null) {
+    let paramUrl = "";
+    for (key in params) {
+      if (params[key] != "")
+        paramUrl = paramUrl + key + "=" + params[key] + "&";
+    }
+    paramUrl = paramUrl.substring(0, paramUrl.length - 1);
     axios({
       method: "get",
-      url: url,
+      url: url + "?" + paramUrl,
       data: params,
       timeout: 1000,
     })
@@ -18,7 +24,7 @@ const request = (function () {
       })
       .catch(function (error) {
         console.log(error);
-      })
+      });
   }
   /**
    * post 요청
@@ -39,7 +45,7 @@ const request = (function () {
       })
       .catch(function (error) {
         console.log(error);
-      })
+      });
   }
   /**
    * put 요청
@@ -60,7 +66,7 @@ const request = (function () {
       })
       .catch(function (error) {
         console.log(error);
-      })
+      });
   }
   /**
    * patch 요청
@@ -81,7 +87,7 @@ const request = (function () {
       })
       .catch(function (error) {
         console.log(error);
-      })
+      });
   }
   /**
    * delete 요청
@@ -102,7 +108,7 @@ const request = (function () {
       })
       .catch(function (error) {
         console.log(error);
-      })
+      });
   }
 
   return {

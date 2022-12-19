@@ -15,9 +15,8 @@ app.use(bodyParser.urlencoded({ extended : false }))
 app.use("/", mainRouter);
 app.use("/", fileRouter);
 
-
-const testRouter = require('./src/test/router/testRouter')
-app.use("/music",testRouter)
+const musicRouter = require('./src/music/router/musicRouter')
+app.use("/music",musicRouter)
 
 const port = 3000;
 

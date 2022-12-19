@@ -21,7 +21,6 @@ const upload = multer({ storage: storage });
 const fileRouter = express.Router(); // router 인스턴스 생성
 
 fileRouter.post("/file", upload.single("file"), function (req, res) {
-  console.log("req", req);
   let data = JSON.parse(req.body.data); //title,content
   data.path = req.file.path;
   data.filename = req.file.filename;
