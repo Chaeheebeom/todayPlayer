@@ -1,8 +1,9 @@
 const makePlayList = (function () {
+  let tbodyId = "";
   let columnDefine = [
     {
       type: "checkbox",
-      id:'motherCheckbox',
+      id: "motherCheckbox",
       name: "",
       style: {
         width: "5%",
@@ -21,9 +22,39 @@ const makePlayList = (function () {
       },
     },
   ];
+
+  let rowDefine = [
+    {
+      type: "checkbox",
+      key: "",
+      event: { action: "click", fn: checkboxEvent },
+    },
+    { key: "name" },
+    { key: "" },
+  ];
+
+  function checkboxEvent(event, data) {
+    console.log(event);
+    console.log(data);
+  }
+
   function init() {
-    table.makeTableLayout("playListLeftDiv", columnDefine);
+    addEvent();
+    tbodyId = table.makeTableLayout("playListLeftDiv", columnDefine);
     search();
+  }
+
+  function addEvent() {
+    document.querySelector("#addMusicBtn").onclick = addMusic;
+    document.querySelector("#exceptMusicBtn").onclick = exceptMusic;
+  }
+
+  function addMusic() {
+    console.log("음악더하기");
+  }
+
+  function exceptMusic() {
+    console.log("음악뺴기");
   }
 
   function search() {
@@ -36,7 +67,8 @@ const makePlayList = (function () {
   function drawContent(json) {
     let musics = json.data;
 
-    console.log("음악", musics);
+    console.log("음악", musics.data);
+    table.buildTable(tbodyId, musics.data, rowDefine);
   }
   return { init: init };
 })();

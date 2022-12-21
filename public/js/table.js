@@ -19,12 +19,10 @@ const table = (function () {
    *        rowspan: 세로병합
    *    }
    * ]
-   * @returns {string} tbody id를 리턴
+   * @returns {string} tbodyId를 리턴
    */
   function makeTableLayout(divId, columnDefine) {
-    let checkColumnDefine = null;
     let tbodyId = "";
-
     if (divId == "") {
       console.error("divId값이 없습니다");
       return tbodyId;
@@ -32,7 +30,7 @@ const table = (function () {
     try {
       initDiv(divId);
 
-      checkColumnDefine = checkDefine(columnDefine);
+      checkColumnDefine(columnDefine);
 
       let table = document.createElement("table");
       table.style.minWidth = "100%";
@@ -47,7 +45,7 @@ const table = (function () {
         trs.push(document.createElement("tr"));
       }
 
-      checkColumnDefine.forEach((column) => {
+      columnDefine.forEach((column) => {
         let td = document.createElement("td");
         if (column.type == "string") {
           td.innerHTML = column.name;
@@ -63,7 +61,7 @@ const table = (function () {
           input.type = column.type;
           input.id = column.id;
           column.type != "checkbox" ? (input.disabled = true) : null;
-          if (column.type == "textarea" || column.type == "checkbox") {
+          if (column.type == "checkbox") {
             input.innerHTML = column.name;
           } else if (column.type == "text" || column.type == "number") {
             input.value = column.name;
@@ -110,7 +108,7 @@ const table = (function () {
     return result;
   }
 
-  function checkDefine(columnDefine) {
+  function checkColumnDefine(columnDefine) {
     if (!Array.isArray(columnDefine))
       throw "columnDefine 타입은 배열 타입이어야 합니다.";
 
@@ -159,9 +157,101 @@ const table = (function () {
 
       column.line > maxLine ? (maxLine = column.line) : null;
     });
+  }
+  /**
+   * 테이블에 정보를 집어넣는 함수
+   * @param {string} tbodyId
+   * @param {object} data
+   * let data = [
+   *    {
+   *        key_1: value_1,
+   *        key_2: value_2,
+   *            .....
+   *        key_n: key_n
+   *    }
+   * ]
+   * @param {object} rowDefine
+   *
+   * let rowDefine = [
+   * {
+   *   type:'text', 'checkbox', 'number', 'textarea' 'string'
+   *    key:
+   * }
+   * ]
+   */
+  function buildTable(tbodyId, dataArr, rowDefine) {
+    try {
+      checkRowDefine(rowDefine);
 
-    return columnDefine;
+      let trs = [];
+      let id = 0;
+      dataArr.forEach((data) => {
+        let tr = document.createElement("tr");
+
+        rowDefine.forEach((define) => {
+          let td = document.createElement("td");
+
+          if (define.type == "string") {
+            td.innerHTML = getDataBykey(data, define.key);
+          } else if (define.type == "textarea") {
+            let textarea = document.createElement(define.type);
+            textarea.value = getDataBykey(data, define.key);
+            textarea.id = "td_" + define.key + "_" + String(id);
+
+            if(Object.keys(define.event).length !=0){
+                addEvent(textarea,define.event,data);
+            }
+            td.appendChild(textarea);
+          } else {
+            let input = document.createElement("input");
+            input.type = define.type;
+            input.id = "td_" + define.key + "_" + String(id);
+            if (define.type == "checkbox") {
+              input.innerHTML = getDataBykey(data, define.key);
+            } else if (define.type == "text" || define.type == "number") {
+              input.value = getDataBykey(data, define.key);
+            }
+            if(Object.keys(define.event).length !=0){
+                addEvent(input,define.event,data);
+            }
+            td.appendChild(input);
+          }
+          tr.appendChild(td);
+        });
+        trs.push(tr);
+      });
+      trs.forEach((tr) =>
+        document.querySelector("#" + tbodyId).appendChild(tr)
+      );
+    } catch (e) {
+      console.error(e);
+    }
   }
 
-  return { makeTableLayout: makeTableLayout };
+  function addEvent(tag,event,data){
+    tag.addEventListener(event.action,(me)=>event.fn(me,data));
+  }
+
+  function getDataBykey(data, key) {
+    return data[key] ? data[key] : "";
+  }
+
+  function checkRowDefine(rowDefine) {
+    rowDefine.forEach((define) => {
+      define.type == null ? (define.type = "string") : null;
+      define.key == null ? (define.key = "") : null;
+      define.event == null ? (define.event = {}) : null;
+      if (typeof define.type != "string") {
+        throw "type의 타입은 string 타입이어야 합니다.";
+      }
+      if (typeof define.key != "string") {
+        throw "key의 타입은 string 타입이어야 합니다.";
+      }
+      if (typeof define.event != "object") {
+        throw "event의 타입은 object 타입이어야 합니다.";
+      }
+    });
+  }
+
+  return { makeTableLayout: makeTableLayout, buildTable: buildTable };
 })();

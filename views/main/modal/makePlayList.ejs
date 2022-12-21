@@ -23,12 +23,21 @@
         "
       >
         <div style="margin: 10px">
-          <input id="searchText" type="text" />
+          <input
+            id="makePlayListSearchText"
+            type="text"
+            style="
+              border-radius: 10px 10px 10px 10px/10px 10px 10px 10px;
+              border: 1px solid grey;
+              width: 20vw;
+            "
+          />
           <i class="fa-solid fa-magnifying-glass"></i>
         </div>
-        <div style="margin: 10px; overflow-y: visible" id="playListLeftDiv">
-          
-        </div>
+        <div
+          style="margin: 10px; overflow-y: visible"
+          id="playListLeftDiv"
+        ></div>
       </div>
       <div
         style="
@@ -39,8 +48,8 @@
           justify-content: space-evenly;
         "
       >
-        <i class="fa-solid fa-arrow-right"></i>
-        <i class="fa-solid fa-arrow-left"></i>
+        <i class="fa-solid fa-arrow-right clicktag" id="addMusicBtn"></i>
+        <i class="fa-solid fa-arrow-left clicktag" id="exceptMusicBtn"></i>
       </div>
       <div
         style="
