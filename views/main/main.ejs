@@ -5,10 +5,12 @@
 <script src="/js/file.js"></script>
 <script src="/js/modal.js"></script>
 <script src="/js/request.js"></script>
+<script src="/js/table.js"></script>
 <script src="/js/main/main.js"></script>
 <script src="/js/main/content.js"></script>
+<script src="/js/main/playList.js"></script>
 <script src="/js/main/modal/upload.js"></script>
-
+<script src="/js/main/modal/makePlayList.js"></script>
 <script>
   window.onload = function () {
     main.init();
@@ -16,6 +18,7 @@
 </script>
 <html>
   <head>
+    <link href="/css/table.css" rel="stylesheet" type="text/css" />
     <link href="/css/style.css" rel="stylesheet" type="text/css" />
     <link href="/css/main.css" rel="stylesheet" type="text/css" />
     <link href="/css/modal.css" rel="stylesheet" type="text/css" />
@@ -95,7 +98,7 @@
               <li
                 class="clicktag"
                 name="li_2"
-                onclick="main.call('PLAYLIST',content.init)"
+                onclick="main.call('PLAYLIST',playList.init)"
                 style="display: flex"
               >
                 <i class="fa-solid fa-headphones"></i
@@ -107,11 +110,15 @@
 
         <div id="contentBody"></div>
       </div>
-      
-      <div class="footer-container"> 
-        <audio controls id="footerAudio" controlsList="nodownload" style="width:20vw"></audio>
-      </div>
 
+      <div class="footer-container">
+        <audio
+          controls
+          id="footerAudio"
+          controlsList="nodownload"
+          style="width: 20vw"
+        ></audio>
+      </div>
     </div>
     <!-- Modal -->
     <div id="modal-content"></div>

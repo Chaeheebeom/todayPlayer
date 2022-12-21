@@ -8,6 +8,7 @@ const PAGETABLE = {
   UPLOAD: path + "/views/main/modal/upload.ejs",
   CONTENT: path + "/views/main/content.ejs",
   PLAYLIST: path + "/views/main/playList.ejs",
+  MAKEPLAYLIST: path + "/views/main/modal/makePlayList.ejs",
 };
 
 const serverDefines = require("../config/serverDefines");
@@ -22,7 +23,7 @@ mainRouter.get("/page/:key", function (req, res) {
   res.sendFile(PAGETABLE[req.params.key]);
 });
 
-mainRouter.get("/genes",function(req,res){
+mainRouter.get("/genes", function (req, res) {
   let geneArr = [
     "가요",
     "락",
@@ -43,9 +44,9 @@ mainRouter.get("/genes",function(req,res){
     "오에스티",
     "만화주제가",
     "커버",
-    "자작곡"
+    "자작곡",
   ];
   res.send(geneArr);
-})
+});
 
 module.exports = mainRouter;

@@ -5,6 +5,7 @@ const modal = (function () {
    * @param {function} callback
    */
   function show(key, callback) {
+    document.querySelector('#footerAudio').pause();
     request.get("page/" + key, {}, function (page) {
       document.querySelector("#modal-content").innerHTML = page.data;
       document.querySelector("#modal-content").style.display = "block";

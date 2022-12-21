@@ -1,0 +1,63 @@
+<div class="modal-container">
+  <div class="modal-header">
+    <h4 class="modal-title">플레이리스트 만들기</h4>
+    <button type="button" class="btn-close" onclick="modal.hide();"></button>
+  </div>
+
+  <div class="modal-body">
+    <div
+      style="
+        display: grid;
+        grid-template-columns: 5fr 0.5fr 5fr;
+        column-gap: 20px;
+        min-height: 100%;
+        max-height: 100%;
+      "
+    >
+      <div
+        style="
+          display: flex;
+          flex-direction: column;
+          border: 1px solid grey;
+          border-radius: 10px 10px 10px 10px / 10px 10px 10px 10px;
+        "
+      >
+        <div style="margin: 10px">
+          <input id="searchText" type="text" />
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </div>
+        <div style="margin: 10px; overflow-y: visible" id="playListLeftDiv">
+          
+        </div>
+      </div>
+      <div
+        style="
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          justify-content: space-evenly;
+        "
+      >
+        <i class="fa-solid fa-arrow-right"></i>
+        <i class="fa-solid fa-arrow-left"></i>
+      </div>
+      <div
+        style="
+          border: 1px solid grey;
+          border-radius: 10px 10px 10px 10px / 10px 10px 10px 10px;
+        "
+      >
+        오른쪽
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" id="makePlayListSaveBtn">
+      올리기
+    </button>
+    <button type="button" class="btn btn-secondary" onclick="modal.hide();">
+      닫기
+    </button>
+  </div>
+</div>
