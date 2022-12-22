@@ -5,7 +5,9 @@
   </div>
 
   <div class="modal-body">
+
     <div
+    id="selectMusicDiv"
       style="
         display: grid;
         grid-template-columns: 5fr 0.5fr 5fr;
@@ -22,7 +24,7 @@
           border-radius: 10px 10px 10px 10px / 10px 10px 10px 10px;
         "
       >
-        <div style="margin: 10px">
+        <div style="margin: 10px; height: 40px">
           <input
             id="makePlayListSearchText"
             type="text"
@@ -57,13 +59,28 @@
           border-radius: 10px 10px 10px 10px / 10px 10px 10px 10px;
         "
       >
-        오른쪽
+        <div style="margin: 10px; height: 40px"></div>
+        <div
+          style="margin: 10px; overflow-y: visible"
+          id="playListRightDiv"
+        ></div>
       </div>
     </div>
+
+    <div id="playListDataDiv">
+      엌
+    </div>
+
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-primary" id="makePlayListSaveBtn">
-      올리기
+    <button type="button" class="btn btn-primary" id="makePlayListSaveBtn" style="display:none">
+      플리만들기!
+    </button>
+    <button type="button" class="btn btn-primary" id="makePlayListPreviewBtn" style="display:none">
+      이전
+    </button>
+    <button type="button" class="btn btn-primary" id="makePlayListNextBtn">
+      다음
     </button>
     <button type="button" class="btn btn-secondary" onclick="modal.hide();">
       닫기

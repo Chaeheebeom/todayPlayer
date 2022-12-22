@@ -1,10 +1,16 @@
 const makePlayList = (function () {
-  let tbodyId = "";
+  let leftTbodyId = "";
+  let rightTbodyId = "";
+
+  let searchMusicList = [];
+  let selectedMusicList = [];
+
   let columnDefine = [
     {
       type: "checkbox",
       id: "motherCheckbox",
       name: "",
+      event: { action: "click", fn: motherCheckboxEvent },
       style: {
         width: "5%",
       },
@@ -26,35 +32,151 @@ const makePlayList = (function () {
   let rowDefine = [
     {
       type: "checkbox",
-      key: "",
-      event: { action: "click", fn: checkboxEvent },
+      class: "leftChildCheckbox",
     },
     { key: "name" },
     { key: "" },
   ];
 
-  function checkboxEvent(event, data) {
-    console.log(event);
-    console.log(data);
+  let motherChildMap = {
+    leftMotherCheckbox: "leftChildCheckbox",
+    rightMotherCheckbox: "rightChildCheckbox",
+  };
+
+  function motherCheckboxEvent(event, data) {
+    let childId = motherChildMap[event.target.id];
+    event.target.checked
+      ? document
+          .querySelectorAll("input." + childId)
+          .forEach((checkbox) => (checkbox.checked = true))
+      : document
+          .querySelectorAll("input." + childId)
+          .forEach((checkbox) => (checkbox.checked = false));
   }
 
   function init() {
+    initVar();
     addEvent();
-    tbodyId = table.makeTableLayout("playListLeftDiv", columnDefine);
+    columnDefine[0].id = "leftMotherCheckbox";
+    leftTbodyId = table.makeTableLayout("playListLeftDiv", columnDefine);
+    columnDefine[0].id = "rightMotherCheckbox";
+    rightTbodyId = table.makeTableLayout("playListRightDiv", columnDefine);
     search();
+  }
+
+  function initVar() {
+    leftTbodyId = "";
+    rightTbodyId = "";
+
+    searchMusicList = [];
+    selectedMusicList = [];
+
+    currnetPage = "select";
   }
 
   function addEvent() {
     document.querySelector("#addMusicBtn").onclick = addMusic;
     document.querySelector("#exceptMusicBtn").onclick = exceptMusic;
+    document.querySelector("#makePlayListNextBtn").onclick = () =>
+      pageChangeEvent("INPUT");
+    document.querySelector("#makePlayListPreviewBtn").onclick = () =>
+      pageChangeEvent("SELECT");
   }
 
   function addMusic() {
-    console.log("음악더하기");
+    let idx = 0;
+    let isNewCheck = false;
+    document.querySelectorAll("input.leftChildCheckbox").forEach((checkbox) => {
+      if (checkbox.checked) {
+        isNewCheck = true;
+        selectedMusicList.push(searchMusicList[idx]);
+      }
+      idx++;
+    });
+
+    if (!isNewCheck) return;
+
+    rowDefine[0].class = "rightChildCheckbox";
+    table.buildTable(rightTbodyId, selectedMusicList, rowDefine);
   }
 
   function exceptMusic() {
-    console.log("음악뺴기");
+    let idx = 0;
+    let isNewCheck = false;
+
+    let tempList = selectedMusicList.slice();
+    selectedMusicList = [];
+    document
+      .querySelectorAll("input.rightChildCheckbox")
+      .forEach((checkbox) => {
+        if (!checkbox.checked) {
+          selectedMusicList.push(tempList[idx]);
+        } else {
+          isNewCheck = true;
+        }
+        idx++;
+      });
+
+    if (!isNewCheck) return;
+
+    rowDefine[0].class = "rightChildCheckbox";
+    table.buildTable(rightTbodyId, selectedMusicList, rowDefine);
+  }
+
+  let PAGE = {
+    SELECT: function () {
+      document.querySelector("#makePlayListPreviewBtn").style.display = "none";
+      document.querySelector("#makePlayListNextBtn").style.display = "block";
+      document.querySelector("#makePlayListSaveBtn").style.display = "none";
+
+      document.querySelector("#selectMusicDiv").style.display = "grid";
+      document.querySelector("#playListDataDiv").style.display = "none";
+
+      document.querySelector("#makePlayListPreviewBtn").onclick = () =>
+        pageChangeEvent("SELECT");
+      document.querySelector("#makePlayListNextBtn").onclick = () =>
+        pageChangeEvent("INPUT");
+    },
+    INPUT: function () {
+      let { isFine, message } = checkMusicList();
+
+      if (!isFine) {
+        alert(message);
+      } else {
+        document.querySelector("#makePlayListPreviewBtn").style.display =
+          "block";
+        document.querySelector("#makePlayListNextBtn").style.display = "none";
+        document.querySelector("#makePlayListSaveBtn").style.display = "block";
+
+        document.querySelector("#selectMusicDiv").style.display = "none";
+        document.querySelector("#playListDataDiv").style.display = "flex";
+
+        document.querySelector("#makePlayListPreviewBtn").onclick = () =>
+          pageChangeEvent("SELECT");
+      }
+    },
+  };
+  //'SELECT' 'INPUT'
+  function pageChangeEvent(pageType) {
+    PAGE[pageType]();
+  }
+
+  function checkMusicList() {
+    let isFine = true;
+    let message = "";
+
+    if (selectedMusicList.length == 0) {
+      isFine = false;
+      message = "플레이리스트는 최소 3곡에서 최대 10곡까지 선택해야 합니다.";
+    } else if (selectedMusicList.length < 2) {
+      isFine = false;
+      message = "플레이리스트는 최소 3곡은 선택해야 합니다";
+    } else if (selectedMusicList.length > 10) {
+      isFine = false;
+      message = "플레이리스트는 최대 10곡까지 가능 합니다";
+    }
+
+    return { isFine, message };
   }
 
   function search() {
@@ -67,8 +189,9 @@ const makePlayList = (function () {
   function drawContent(json) {
     let musics = json.data;
 
-    console.log("음악", musics.data);
-    table.buildTable(tbodyId, musics.data, rowDefine);
+    searchMusicList = musics.data;
+    rowDefine[0].class = "leftChildCheckbox";
+    table.buildTable(leftTbodyId, searchMusicList, rowDefine);
   }
   return { init: init };
 })();

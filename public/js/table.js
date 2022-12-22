@@ -10,6 +10,7 @@ const table = (function () {
    *        type:  'text', 'checkbox', 'number', 'textarea' 'string'
    *        id: 스트링값 없으면 빈칸
    *        name: 스트링값 없으면 빈칸
+   *        event: { action: "click", fn: motherCheckboxEvent },
    *        style: {
    *            width:20%,
    *            height:30%
@@ -50,11 +51,17 @@ const table = (function () {
         if (column.type == "string") {
           td.innerHTML = column.name;
           td.id = column.id;
+          if (Object.keys(column.event).length != 0) {
+            addEvent(td, column.event);
+          }
         } else if (column.type == "textarea") {
           let textarea = document.createElement(column.type);
           textarea.value = column.name;
           textarea.disabled = true;
           textarea.id = column.id;
+          if (Object.keys(column.event).length != 0) {
+            addEvent(textarea, column.event);
+          }
           td.appendChild(textarea);
         } else {
           let input = document.createElement("input");
@@ -65,6 +72,9 @@ const table = (function () {
             input.innerHTML = column.name;
           } else if (column.type == "text" || column.type == "number") {
             input.value = column.name;
+          }
+          if (Object.keys(column.event).length != 0) {
+            addEvent(input, column.event);
           }
           td.appendChild(input);
         }
@@ -119,6 +129,7 @@ const table = (function () {
       column.id == null ? (column.id = "") : null;
       column.name == null ? (column.name = "") : null;
       column.style == null ? (column.style = {}) : null;
+      column.event == null ? (column.event = {}) : null;
 
       column.line == null ? (column.line = 1) : null;
       column.colspan == null ? (column.colspan = 1) : null;
@@ -154,7 +165,9 @@ const table = (function () {
       if (typeof column.rowspan != "number") {
         throw "rowspan의 타입은 string 타입이어야 합니다.";
       }
-
+      if (typeof column.event != "object") {
+        throw "event의 타입은 object 타입이어야 합니다.";
+      }
       column.line > maxLine ? (maxLine = column.line) : null;
     });
   }
@@ -193,14 +206,19 @@ const table = (function () {
 
           if (define.type == "string") {
             td.innerHTML = getDataBykey(data, define.key);
+            if (Object.keys(define.event).length != 0) {
+              addEvent(td, define.event, data);
+            }
+            td.className = define.class;
           } else if (define.type == "textarea") {
             let textarea = document.createElement(define.type);
             textarea.value = getDataBykey(data, define.key);
             textarea.id = "td_" + define.key + "_" + String(id);
 
-            if(Object.keys(define.event).length !=0){
-                addEvent(textarea,define.event,data);
+            if (Object.keys(define.event).length != 0) {
+              addEvent(textarea, define.event, data);
             }
+            textarea.className = define.class;
             td.appendChild(textarea);
           } else {
             let input = document.createElement("input");
@@ -211,15 +229,19 @@ const table = (function () {
             } else if (define.type == "text" || define.type == "number") {
               input.value = getDataBykey(data, define.key);
             }
-            if(Object.keys(define.event).length !=0){
-                addEvent(input,define.event,data);
+            if (Object.keys(define.event).length != 0) {
+              addEvent(input, define.event, data);
             }
+            input.className = define.class;
             td.appendChild(input);
           }
           tr.appendChild(td);
         });
+        id++;
         trs.push(tr);
       });
+
+      initTbody(tbodyId);
       trs.forEach((tr) =>
         document.querySelector("#" + tbodyId).appendChild(tr)
       );
@@ -228,8 +250,13 @@ const table = (function () {
     }
   }
 
-  function addEvent(tag,event,data){
-    tag.addEventListener(event.action,(me)=>event.fn(me,data));
+  function initTbody(tbodyId) {
+    let trs = document.querySelector("#" + tbodyId).childNodes;
+    for (var i = trs.length - 1; i > -1; i--) trs[i].remove();
+  }
+
+  function addEvent(tag, event, data = {}) {
+    tag.addEventListener(event.action, (me) => event.fn(me, data));
   }
 
   function getDataBykey(data, key) {
@@ -241,8 +268,13 @@ const table = (function () {
       define.type == null ? (define.type = "string") : null;
       define.key == null ? (define.key = "") : null;
       define.event == null ? (define.event = {}) : null;
+      define.class == null ? (define.class = "") : null;
+
       if (typeof define.type != "string") {
         throw "type의 타입은 string 타입이어야 합니다.";
+      }
+      if (typeof define.class != "string") {
+        throw "class의 타입은 string 타입이어야 합니다.";
       }
       if (typeof define.key != "string") {
         throw "key의 타입은 string 타입이어야 합니다.";
