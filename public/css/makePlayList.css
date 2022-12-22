@@ -1,0 +1,25 @@
+div.input-template {
+  margin: 10px 10px;
+  padding: 5px 10px 5px 10px;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid grey;
+  border-radius: 10px 10px 10px 10px / 10px 10px 10px 10px;
+}
+
+div.input-title {
+  font-size: 14px;
+}
+
+.input-content {
+  border: none;
+  outline: none;
+  width: 100%;
+}
+
+div.input-footer {
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  flex-basis: 30px;
+}
