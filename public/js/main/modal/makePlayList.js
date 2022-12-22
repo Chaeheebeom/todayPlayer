@@ -5,6 +5,8 @@ const makePlayList = (function () {
   let searchMusicList = [];
   let selectedMusicList = [];
 
+  let picture = null;
+
   let columnDefine = [
     {
       type: "checkbox",
@@ -71,7 +73,7 @@ const makePlayList = (function () {
     searchMusicList = [];
     selectedMusicList = [];
 
-    currnetPage = "select";
+    picture = null;
   }
 
   function addEvent() {
@@ -81,6 +83,10 @@ const makePlayList = (function () {
       pageChangeEvent("INPUT");
     document.querySelector("#makePlayListPreviewBtn").onclick = () =>
       pageChangeEvent("SELECT");
+
+    document.querySelector("#choosePictureBtn").onclick = choosePictureEvent;
+    document.querySelector("#makeplaylist_picture_upload").onchange =
+      fileChangeEvent;
   }
 
   function addMusic() {
@@ -123,6 +129,17 @@ const makePlayList = (function () {
     table.buildTable(rightTbodyId, selectedMusicList, rowDefine);
   }
 
+  function choosePictureEvent() {
+    document.querySelector("#makeplaylist_picture_upload").click();
+  }
+
+  function fileChangeEvent() {
+    picture = document.querySelector("#makeplaylist_picture_upload").files[0];
+    var objectURL = URL.createObjectURL(picture);
+    document.querySelector("#picturePlaceHolder").style.display = "none";
+    document.querySelector("img").src = objectURL;
+  }
+
   let PAGE = {
     SELECT: function () {
       document.querySelector("#makePlayListPreviewBtn").style.display = "none";
@@ -149,7 +166,13 @@ const makePlayList = (function () {
         document.querySelector("#makePlayListSaveBtn").style.display = "block";
 
         document.querySelector("#selectMusicDiv").style.display = "none";
-        document.querySelector("#playListDataDiv").style.display = "flex";
+        document.querySelector("#playListDataDiv").style.display = "grid";
+
+        leftTbodyId = table.makeTableLayout(
+          "selectedMusicRightDiv",
+          columnDefine
+        );
+        table.buildTable(leftTbodyId, selectedMusicList, rowDefine);
 
         document.querySelector("#makePlayListPreviewBtn").onclick = () =>
           pageChangeEvent("SELECT");

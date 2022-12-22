@@ -1,3 +1,5 @@
+<link href="/css/makePlayList.css" rel="stylesheet" type="text/css" />
+
 <div class="modal-container">
   <div class="modal-header">
     <h4 class="modal-title">플레이리스트 만들기</h4>
@@ -5,9 +7,8 @@
   </div>
 
   <div class="modal-body">
-
     <div
-    id="selectMusicDiv"
+      id="selectMusicDiv"
       style="
         display: grid;
         grid-template-columns: 5fr 0.5fr 5fr;
@@ -41,6 +42,7 @@
           id="playListLeftDiv"
         ></div>
       </div>
+
       <div
         style="
           display: flex;
@@ -53,6 +55,7 @@
         <i class="fa-solid fa-arrow-right clicktag" id="addMusicBtn"></i>
         <i class="fa-solid fa-arrow-left clicktag" id="exceptMusicBtn"></i>
       </div>
+
       <div
         style="
           border: 1px solid grey;
@@ -67,16 +70,85 @@
       </div>
     </div>
 
-    <div id="playListDataDiv">
-      엌
-    </div>
+    <div
+      id="playListDataDiv"
+      style="
+        display: none;
+        grid-template-columns: 5fr 0.5fr 5fr;
+        column-gap: 20px;
+        min-height: 100%;
+        max-height: 100%;
+      "
+    >
+      <div
+        style="
+          border: 1px solid grey;
+          border-radius: 10px 10px 10px 10px / 10px 10px 10px 10px;
+        "
+      >
+        <div style="margin: 10px; height: 40px">
+          플리제목:
+          <input
+            id="makePlayListTitleText"
+            type="text"
+            style="
+              border-radius: 10px 10px 10px 10px/10px 10px 10px 10px;
+              border: 1px solid grey;
+              width: 20vw;
+            "
+          />
+        </div>
+        <div
+          style="margin: 10px; overflow-y: visible"
+          id="selectedMusicRightDiv"
+        ></div>
+      </div>
 
+      <div></div>
+
+      <div
+        style="
+          display: flex;
+          flex-direction: column;
+          border: 1px solid grey;
+          border-radius: 10px 10px 10px 10px / 10px 10px 10px 10px;
+        "
+      >
+        <div style="display: flex; justify-content: flex-end">
+          <button type="button" class="btn btn-light" id="choosePictureBtn">
+            그림선택
+          </button>
+        </div>
+        <div style="border: 2px solid black; height: 20vh; margin: 10px 10px">
+          <label id="picturePlaceHolder">그림을 드롭해주세요</label>
+          <img
+            style="
+              width: 100%;
+              display: inline-block;
+              content: '';
+              height: 100%;
+              object-fit: contain;
+            "
+          />
+        </div>
+      </div>
+    </div>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-primary" id="makePlayListSaveBtn" style="display:none">
+    <button
+      type="button"
+      class="btn btn-primary"
+      id="makePlayListSaveBtn"
+      style="display: none"
+    >
       플리만들기!
     </button>
-    <button type="button" class="btn btn-primary" id="makePlayListPreviewBtn" style="display:none">
+    <button
+      type="button"
+      class="btn btn-primary"
+      id="makePlayListPreviewBtn"
+      style="display: none"
+    >
       이전
     </button>
     <button type="button" class="btn btn-primary" id="makePlayListNextBtn">
@@ -87,3 +159,10 @@
     </button>
   </div>
 </div>
+
+<input
+  type="file"
+  id="makeplaylist_picture_upload"
+  style="display: none"
+  accept="image/*"
+/>
